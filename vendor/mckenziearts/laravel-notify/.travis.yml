@@ -1,0 +1,24 @@
+language: php
+
+sudo: true
+
+php:
+  - 7.2
+
+env:
+  matrix:
+    - LARAVEL_VERSION=7.0.*
+
+matrix:
+  fast_finish: true
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - node_modules
+
+before_script:
+  - travis_retry composer self-update
+  - composer require "illuminate/support:${LARAVEL_VERSION}"
+  - npm install
+  - npm run dev
